@@ -1,0 +1,30 @@
+{
+    "adj_mark": {
+        "message": "Nota ajustada",
+        "description": "The text displayed in the column header that shows the mark of the student adjusted to be between 0 and the maximum mark that any student has obtained."
+    },
+    "data_extra": {
+        "message": "Datos extra no oficiales",
+        "description": "The header for the container that shows the data that the extension has calculated."
+    },
+    "num_alu": {
+        "message": "Número de alumnos:",
+        "description": "The label used in the data table that shows the amount of students that were in the lists for the exam."
+    },
+    "num_pres": {
+        "message": "Número de alumnos presentados:",
+        "description": "The label used in the data table that shows the amount of students that went to the exam."
+    },
+    "per_pres": {
+        "message": "% alumnos presentados:",
+        "description": "The label used in the data table that shows the amount of students that wen to the exam in comparison to the ones who didn't."
+    },
+    "per_aprov": {
+        "message": "% alumnos aprobados:",
+        "description": "The label used in the data table that shows the percentage of students that got a mark greater or equal to 5."
+    },
+    "mean_mark": {
+        "message": "Nota media alumnos presentados:",
+        "description": "The label used in the data table that shows the median of the marks obtained by the students."
+    }
+}

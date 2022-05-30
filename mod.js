@@ -8,6 +8,37 @@ let marks = []; // La lista de notas completa
 const table = document.getElementsByClassName('upv_listacolumnas')[0];
 const nodes = table.getElementsByTagName('tbody')[0].children;
 
+/**
+ * Obtains a GET parameter from the URL named {key}.
+ * @param {string} key The key of the parameter to get.
+ * @returns {string}
+ */
+const getParameter = (key) => {
+  /**
+   * Obtains a list of all the GET parameters in the URL.
+   * @returns {string[]}
+   */
+  const getParameters = () => {
+    const search = window.location.search.substring(1);
+    const items = search.split('&');
+    const result = {};
+    for(const item in items){
+      const iitem = item.split('=');
+      result[iitem[0]] = iitem[1];
+    }
+    return result;
+  }
+  return getParameters()[key];
+}
+
+const localizedString = (key) => {
+  const language = getParameter('P_IDIOMA');
+  if(chrome != null)
+    return chrome.i18n.getMessage(key);
+  else
+    return null;
+}
+
 // Calculate stats
 for(const i in nodes) {
   const node = nodes[i];
@@ -30,7 +61,7 @@ for(const i in nodes) {
 const constrainedHeader = document.createElement('th'); // Create header
 constrainedHeader.classList.add('aligncenter');
 constrainedHeader.setAttribute('scope', 'col');
-constrainedHeader.innerText = 'Nota ajustada';
+constrainedHeader.innerText = localizedString("adj_mark");
 const rows = table.getElementsByTagName('tr');
 rows[0].appendChild(constrainedHeader); // Append header to the table
 for (let c = 0; c < numAlu; c++) {
@@ -48,7 +79,7 @@ const extraDataContainer = document.createElement('div'); // Crea el contenedor
 extraDataContainer.classList.add('container');
 const extraDataHeader = document.createElement('h2');
 extraDataHeader.classList.add('destacado');
-extraDataHeader.innerText = 'Datos extra no oficiales';
+extraDataHeader.innerText = localizedString("data_extra");
 extraDataContainer.appendChild(extraDataHeader);
 const extraDataContainerWrap = document.createElement('div');
 extraDataContainerWrap.classList.add('upv_containerwrap');
@@ -85,19 +116,19 @@ const createDataRow = (label, value, anon = false) => {
 };
 
 extraDataContainerTableBody.appendChild(
-  createDataRow('Número de alumnos:', numAlu, true)
+  createDataRow(localizedString("num_alu"), numAlu, true)
 );
 extraDataContainerTableBody.appendChild(
-  createDataRow('Número de alumnos presentados:', presAlu)
+  createDataRow(localizedString("num_pres"), presAlu)
 );
 extraDataContainerTableBody.appendChild(
-  createDataRow('% alumnos presentados:', `${(presAlu/numAlu).toFixed(4)*100} %`)
+  createDataRow(localizedString("per_pres"), `${(presAlu/numAlu).toFixed(4)*100} %`)
 );
 extraDataContainerTableBody.appendChild(
-  createDataRow('Nota media alumnos presentados:', (sumMarks/presAlu).toFixed(2))
+  createDataRow(localizedString("mean_mark"), (sumMarks/presAlu).toFixed(2))
 );
 extraDataContainerTableBody.appendChild(
-  createDataRow('% alumnos aprobados:', (approvAlu/presAlu).toFixed(4)*100)
+  createDataRow(localizedString("per_aprov"), (approvAlu/presAlu).toFixed(4)*100)
 );
 
 extraDataContainerTable.appendChild(extraDataContainerTableBody);
