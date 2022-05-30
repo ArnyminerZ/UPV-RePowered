@@ -1,13 +1,15 @@
 # UPV RePowered
 **Chrome:**
-[![Chrome Web Store](https://img.shields.io/chrome-web-store/v/npfnhbnfidlfkkoafboojlabnjaoldip?label=version&style=flat-square)][chrome-extension]
-[![Chrome Web Store](https://img.shields.io/chrome-web-store/users/npfnhbnfidlfkkoafboojlabnjaoldip?style=flat-square)][chrome-extension]
-[![Chrome Web Store](https://img.shields.io/chrome-web-store/rating/npfnhbnfidlfkkoafboojlabnjaoldip?style=flat-square)][chrome-extension]
+
+[![Chrome Web Store][chrome-badge-version]][chrome-extension]
+[![Chrome Web Store][chrome-badge-users]][chrome-extension]
+[![Chrome Web Store][chrome-badge-rating]][chrome-extension]
 
 **Firefox:**
-[![Mozilla Add-on](https://img.shields.io/amo/v/upv-repowered?label=version&style=flat-square)][mozilla-addon]
-[![Mozilla Add-on](https://img.shields.io/amo/users/upv-repowered?style=flat-square)][mozilla-addon]
-[![Mozilla Add-on](https://img.shields.io/amo/rating/upv-repowered?style=flat-square)][mozilla-addon]
+
+[![Mozilla Add-on][mozilla-badge-version]][mozilla-addon]
+[![Mozilla Add-on][mozilla-badge-users]][mozilla-addon]
+[![Mozilla Add-on][mozilla-badge-rating]][mozilla-addon]
 
 Extends the info provided by the UPV in the Intranet panel.
 
@@ -21,6 +23,14 @@ Current functionalities:
   * Mean of the marks of the students.
   * Percentage of students that got a mark greater or equal to 5.
 
-===
+---
 [chrome-extension]: https://example.com
 [mozilla-addon]: https://addons.mozilla.org/ca/firefox/addon/upv-repowered/
+
+[chrome-badge-version]: https://img.shields.io/chrome-web-store/v/npfnhbnfidlfkkoafboojlabnjaoldip?label=version&style=flat-square
+[chrome-badge-users]: https://img.shields.io/chrome-web-store/users/npfnhbnfidlfkkoafboojlabnjaoldip?style=flat-square
+[chrome-badge-rating]: https://img.shields.io/chrome-web-store/rating/npfnhbnfidlfkkoafboojlabnjaoldip?style=flat-square
+
+[mozilla-badge-version]: https://img.shields.io/amo/v/upv-repowered?label=version&style=flat-square
+[mozilla-badge-users]: https://img.shields.io/amo/users/upv-repowered?style=flat-square
+[mozilla-badge-rating]: https://img.shields.io/amo/rating/upv-repowered?style=flat-square
