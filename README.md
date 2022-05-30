@@ -24,8 +24,8 @@ Current functionalities:
   * Percentage of students that got a mark greater or equal to 5.
 
 Supported languages:
-* Catalan (`ca`)
-* Spanish (`es`)
+* 🇦🇩 Catalan (`ca`)
+* 🇪🇸 Spanish (`es`)
 
 # Changelog
 ## 1.0.1 - Localization
