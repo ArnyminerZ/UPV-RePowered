@@ -58,33 +58,47 @@ const extraDataContainerTable = document.createElement('table');
 extraDataContainerTable.classList.add('upv_listacolumnas');
 const extraDataContainerTableBody = document.createElement('tbody');
 
-const extraDataContainerTableNumAlu = document.createElement('tr');
-extraDataContainerTableNumAlu.classList.add('upv_listanon');
-extraDataContainerTableNumAlu.innerHTML += `<td class="alignleft">Número de alumnos:</td>`;
-extraDataContainerTableNumAlu.innerHTML += `<td class="alignleft">${numAlu}</td>`;
-extraDataContainerTableBody.appendChild(extraDataContainerTableNumAlu);
+/**
+ * Creates a data row element, used for displaying the calculated data to the user.
+ * @param {string} label The label that represents the value.
+ * @param {string|number} value The value to display.
+ * @param {boolean} anon If the row should be displayed as anonymous, this is, clearer than the others.
+ * @returns {HTMLTableRowElement} The built `tr` element.
+ */
+const createDataRow = (label, value, anon = false) => {
+  const row = document.createElement('tr');
+  if (anon)
+    row.classList.add('upv_listanon');
 
-const extraDataContainerTablePresAlu = document.createElement('tr');
-extraDataContainerTablePresAlu.innerHTML += `<td class="alignleft">Número de alumnos presentados:</td>`;
-extraDataContainerTablePresAlu.innerHTML += `<td class="alignleft">${presAlu}</td>`;
-extraDataContainerTableBody.appendChild(extraDataContainerTablePresAlu);
+  const cell1 = document.createElement('td');
+  cell1.classList.add('alignleft');
+  cell1.innerText = label;
 
-const extraDataContainerTablePerAlu = document.createElement('tr');
-extraDataContainerTablePerAlu.classList.add('upv_listanon');
-extraDataContainerTablePerAlu.innerHTML += `<td class="alignleft">% alumnos presentados:</td>`;
-extraDataContainerTablePerAlu.innerHTML += `<td class="alignleft">${(presAlu/numAlu).toFixed(4)*100} %</td>`;
-extraDataContainerTableBody.appendChild(extraDataContainerTablePerAlu);
+  const cell2 = document.createElement('td');
+  cell2.classList.add('alignleft');
+  cell2.innerText = value;
 
-const extraDataContainerTableMedMark = document.createElement('tr');
-extraDataContainerTableMedMark.innerHTML += `<td class="alignleft">Nota media alumnos presentados:</td>`;
-extraDataContainerTableMedMark.innerHTML += `<td class="alignleft">${(sumMarks/presAlu).toFixed(2)}</td>`;
-extraDataContainerTableBody.appendChild(extraDataContainerTableMedMark);
+  row.appendChild(cell1);
+  row.appendChild(cell2);
 
-const extraDataContainerTablePerAprov = document.createElement('tr');
-extraDataContainerTablePerAprov.classList.add('upv_listanon');
-extraDataContainerTablePerAprov.innerHTML += `<td class="alignleft">% alumnos aprobados:</td>`;
-extraDataContainerTablePerAprov.innerHTML += `<td class="alignleft">${(approvAlu/presAlu).toFixed(4)*100} %</td>`;
-extraDataContainerTableBody.appendChild(extraDataContainerTablePerAprov);
+  return row;
+};
+
+extraDataContainerTableBody.appendChild(
+  createDataRow('Número de alumnos:', numAlu, true)
+);
+extraDataContainerTableBody.appendChild(
+  createDataRow('Número de alumnos presentados:', presAlu)
+);
+extraDataContainerTableBody.appendChild(
+  createDataRow('% alumnos presentados:', `${(presAlu/numAlu).toFixed(4)*100} %`)
+);
+extraDataContainerTableBody.appendChild(
+  createDataRow('Nota media alumnos presentados:', (sumMarks/presAlu).toFixed(2))
+);
+extraDataContainerTableBody.appendChild(
+  createDataRow('% alumnos aprobados:', (approvAlu/presAlu).toFixed(4)*100)
+);
 
 extraDataContainerTable.appendChild(extraDataContainerTableBody);
 extraDataContainerContent.appendChild(extraDataContainerTable);
