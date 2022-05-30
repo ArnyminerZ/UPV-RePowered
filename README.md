@@ -1,7 +1,13 @@
 # UPV RePowered
-![Chrome Web Store](https://img.shields.io/chrome-web-store/v/npfnhbnfidlfkkoafboojlabnjaoldip?label=version&style=flat-square)
-![Chrome Web Store](https://img.shields.io/chrome-web-store/users/npfnhbnfidlfkkoafboojlabnjaoldip?style=flat-square)
-![Chrome Web Store](https://img.shields.io/chrome-web-store/rating/npfnhbnfidlfkkoafboojlabnjaoldip?style=flat-square)
+**Chrome:**
+[![Chrome Web Store](https://img.shields.io/chrome-web-store/v/npfnhbnfidlfkkoafboojlabnjaoldip?label=version&style=flat-square)][chrome-extension]
+[![Chrome Web Store](https://img.shields.io/chrome-web-store/users/npfnhbnfidlfkkoafboojlabnjaoldip?style=flat-square)][chrome-extension]
+[![Chrome Web Store](https://img.shields.io/chrome-web-store/rating/npfnhbnfidlfkkoafboojlabnjaoldip?style=flat-square)][chrome-extension]
+
+**Firefox:**
+[![Mozilla Add-on](https://img.shields.io/amo/v/upv-repowered?label=version&style=flat-square)][mozilla-addon]
+[![Mozilla Add-on](https://img.shields.io/amo/users/upv-repowered?style=flat-square)][mozilla-addon]
+[![Mozilla Add-on](https://img.shields.io/amo/rating/upv-repowered?style=flat-square)][mozilla-addon]
 
 Extends the info provided by the UPV in the Intranet panel.
 
@@ -14,3 +20,7 @@ Current functionalities:
   * Percentage of students that went to the exam in correlation with the ones who didn't.
   * Mean of the marks of the students.
   * Percentage of students that got a mark greater or equal to 5.
+
+===
+[chrome-extension]: https://example.com
+[mozilla-addon]: https://addons.mozilla.org/ca/firefox/addon/upv-repowered/
