@@ -6,7 +6,7 @@
     
     "content_scripts":[{
         "js": ["mod.js"],
-        "matches": ["https://intranet.upv.es/*"]
+        "matches": ["https://intranet.upv.es/pls/soalu/sic_asi.listado_notas_asi*"]
     }],
 
     "icons": {
