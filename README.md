@@ -23,6 +23,22 @@ Current functionalities:
   * Mean of the marks of the students.
   * Percentage of students that got a mark greater or equal to 5.
 
+Supported languages:
+* 🇦🇩 Catalan (`ca`)
+* 🇪🇸 Spanish (`es`)
+
+# Changelog
+## 1.0.1 - Localization
+Added localized messages in Catalan and Spanish.
+## 1.0.0 - Initial Release
+**Current functionalities**
+Provides stats on the marks of the students:
+* Number of students.
+* Number of students that went to the exam.
+* Percentage of students that went to the exam in correlation with the ones who didn't.
+* Mean of the marks of the students.
+* Percentage of students that got a mark greater or equal to 5.
+
 ---
 [chrome-extension]: https://example.com
 [mozilla-addon]: https://addons.mozilla.org/ca/firefox/addon/upv-repowered/
