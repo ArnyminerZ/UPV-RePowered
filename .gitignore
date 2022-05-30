@@ -1,0 +1,2 @@
+# Ignore the build dir, where the built zip files are stored
+.build
