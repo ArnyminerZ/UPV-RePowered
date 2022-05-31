@@ -1,3 +1,17 @@
+/**
+ * Alias for document.getElementById
+ * @param {string} id The id of the element to select.
+ * @returns {Node}
+ */
+const _ = (id) => document.getElementById(id);
+/**
+ * Alias for document.querySelector.
+ * @param {string} selector The selector for searching for the element. # prefix for id, . for class names, and no prefix for tag name.
+ * @returns {Node}
+ */
+const $ = (selector) => document.querySelector(selector);
+
+
 let numAlu = 0; // Numero total de alumnos
 let sumMarks = 0; // El sumatorio de las notas
 let presAlu = 0; // Numero de alumnos presentados
@@ -5,7 +19,7 @@ let approvAlu = 0; // Numero de alumnos aprobados
 let maxMark = 0; // Nota máxima
 let marks = []; // La lista de notas completa
 
-const table = document.getElementsByClassName('upv_listacolumnas')[0];
+const table = $('.upv_listacolumnas');
 const nodes = table.getElementsByTagName('tbody')[0].children;
 
 /**
@@ -35,6 +49,8 @@ const localizedString = (key) => {
   const language = getParameter('P_IDIOMA');
   if(chrome != null)
     return chrome.i18n.getMessage(key);
+  else if(firefox != null)
+    return firefox.i18n.getMessage(key);
   else
     return null;
 }
