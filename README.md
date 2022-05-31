@@ -42,10 +42,10 @@ Supported languages:
 ### Firefox
 1. Enter the Firefox's Addon Store, and search for "UPV-RePowered" or press [this link][mozilla-addon].
 
-2. Press the "Add to Firefox" button
+2. Press the "Add to Firefox" button\
 ![Add to Firefox](docs/install-firefox-1.png)
 
-3. Press the "Add" button on the popup window.
+3. Press the "Add" button on the popup window.\
 ![Add to Firefox](docs/install-firefox-2.png)
 
 4. You are ready! Just access a marks screen on [intranet.upv.es](https://intranet.upv.es/pls/soalu/sic_asi.Notes_TemaAlu_Asi?P_IDIOMA=c&p_vista=intranet).
