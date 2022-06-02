@@ -37,7 +37,15 @@ Supported languages:
 # Installation instructions
 ## Extensions Store
 ### Chrome
-*Coming soon*
+1. Enter the Chrome's [Addon Store](https://chrome.google.com/webstore/category/extensions), and search for "UPV-RePowered" or press [this link][chrome-extension].
+
+2. Press the "Add to Chrome" button\
+![Add to Chrome](docs/install-chrome-1.png)
+
+3. Press the "Add extension" button\
+![Add Extension](docs/install-chrome-2.png)
+
+4. You are ready! Just access a marks screen on [intranet.upv.es](https://intranet.upv.es/pls/soalu/sic_asi.Notes_TemaAlu_Asi?P_IDIOMA=c&p_vista=intranet).
 
 ### Firefox
 1. Enter the Firefox's Addon Store, and search for "UPV-RePowered" or press [this link][mozilla-addon].
@@ -81,7 +89,7 @@ Provides stats on the marks of the students:
 * Percentage of students that got a mark greater or equal to 5.
 
 ---
-[chrome-extension]: https://example.com
+[chrome-extension]: https://chrome.google.com/webstore/detail/upv-repowered/npfnhbnfidlfkkoafboojlabnjaoldip
 [mozilla-addon]: https://addons.mozilla.org/ca/firefox/addon/upv-repowered/
 
 [chrome-badge-version]: https://img.shields.io/chrome-web-store/v/npfnhbnfidlfkkoafboojlabnjaoldip?label=version&style=flat-square
