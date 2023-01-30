@@ -145,7 +145,7 @@ extraDataContainerTableBody.appendChild(
   createDataRow(localizedString("mean_mark"), (sumMarks/presAlu).toFixed(2))
 );
 extraDataContainerTableBody.appendChild(
-  createDataRow(localizedString("per_aprov"), (approvAlu/presAlu).toFixed(4)*100, true)
+  createDataRow(localizedString("per_aprov"), `${(approvAlu/presAlu).toFixed(4)*100} %`, true)
 );
 
 extraDataContainerTable.appendChild(extraDataContainerTableBody);
