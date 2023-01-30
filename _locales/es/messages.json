@@ -3,6 +3,10 @@
         "message": "Nota ajustada",
         "description": "The text displayed in the column header that shows the mark of the student adjusted to be between 0 and the maximum mark that any student has obtained."
     },
+    "adj_mark_info": {
+        "message": "Se ajusta la nota con respecto a las otras. Es decir, la nota más alta será el 10, y la más baja el 0. Esto no tendrá ningun efecto si la nota máxima ya es un 10 y la mínima un 0",
+        "description": "The explanation of the adjusted mark field."
+    },
     "data_extra": {
         "message": "Datos extra no oficiales",
         "description": "The header for the container that shows the data that the extension has calculated."

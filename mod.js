@@ -78,6 +78,7 @@ const constrainedHeader = document.createElement('th'); // Create header
 constrainedHeader.classList.add('aligncenter');
 constrainedHeader.setAttribute('scope', 'col');
 constrainedHeader.innerText = localizedString("adj_mark");
+constrainedHeader.setAttribute('title', localizedString('adj_mark_info'));
 const rows = table.getElementsByTagName('tr');
 rows[0].appendChild(constrainedHeader); // Append header to the table
 for (let c = 0; c < numAlu; c++) {
