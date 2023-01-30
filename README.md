@@ -82,6 +82,8 @@ Supported languages:
 * [chrome-webstore-upload](https://github.com/fregante/chrome-webstore-upload)
 
 # Changelog
+## 1.0.2
+* Fixed a missing `%` in the approved students row.
 ## 1.0.1 - Localization
 Added localized messages in Catalan and Spanish.
 ## 1.0.0 - Initial Release
