@@ -76,6 +76,9 @@ Supported languages:
 4. Select the downloaded zip file.
 5. You are ready! Just access a marks screen on [intranet.upv.es](https://intranet.upv.es/pls/soalu/sic_asi.Notes_TemaAlu_Asi?P_IDIOMA=c&p_vista=intranet).
 
+# Used libraries
+* [chrome-webstore-upload](https://github.com/fregante/chrome-webstore-upload)
+
 # Changelog
 ## 1.0.1 - Localization
 Added localized messages in Catalan and Spanish.
