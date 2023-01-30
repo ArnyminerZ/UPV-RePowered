@@ -18,6 +18,8 @@
 [![Firefox Download](https://img.shields.io/badge/download-firefox-green?style=flat-square&logo=firefox)][latest-release-firefox]
 [![Chrome Download](https://img.shields.io/badge/download-chrome-green?style=flat-square&logo=googlechrome)][latest-release-chrome]
 
+[![Release Workflow status][release-badge]][release-workflow]
+
 Extends the info provided by the UPV in the Intranet panel.
 
 Based on: https://gist.github.com/ArnyminerZ/820e40b2584b7368f4782d91f0420595
@@ -108,3 +110,6 @@ Provides stats on the marks of the students:
 
 [latest-release-page]: https://github.com/ArnyminerZ/UPV-RePowered/releases/latest
 [github-releases]: https://github.com/ArnyminerZ/UPV-RePowered/releases
+
+[release-badge]: https://img.shields.io/github/actions/workflow/status/ArnyminerZ/UPV-RePowered/release.yml?style=flat-square
+[release-workflow]: https://github.com/ArnyminerZ/UPV-RePowered/actions/workflows/release.yml
