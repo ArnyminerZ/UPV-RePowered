@@ -3,6 +3,8 @@ on:
   pull_request:
     types: [opened, synchronize]
 
+permissions: write-all
+
 jobs:
   auto-label:
     name: Auto Label
