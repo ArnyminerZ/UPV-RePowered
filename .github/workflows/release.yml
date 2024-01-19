@@ -50,7 +50,7 @@ jobs:
         run: npm install -g chrome-webstore-upload-cli
 
       - name: Upload step
-        run: chrome-webstore-upload upload --source extension-${{ github.sha }}/extension-${{ env.RELEASE_VERSION }}.zip --extension-id ${{ env.EXTENSION_ID }} --client-id ${{ secrets.CI_GOOGLE_CLIENT_ID }} --client-secret ${{ secrets.CI_GOOGLE_CLIENT_SECRET }} --refresh-token ${{ secrets.CI_GOOGLE_REFRESH_TOKEN }}
+        run: chrome-webstore-upload upload --source extension-${{ env.RELEASE_VERSION }}.zip --extension-id ${{ env.EXTENSION_ID }} --client-id ${{ secrets.CI_GOOGLE_CLIENT_ID }} --client-secret ${{ secrets.CI_GOOGLE_CLIENT_SECRET }} --refresh-token ${{ secrets.CI_GOOGLE_REFRESH_TOKEN }}
   release-firefox:
     name: Release for Firefox
     runs-on: ubuntu-latest
@@ -68,7 +68,7 @@ jobs:
       - uses: wdzeng/firefox-addon@v1
         with:
           addon-guid: ${{ env.ADDON_GUID }}
-          xpi-path: extension-${{ github.sha }}/extension-${{ env.RELEASE_VERSION }}.zip
+          xpi-path: extension-${{ env.RELEASE_VERSION }}.zip
           self-hosted: false
           jwt-issuer: ${{ secrets.FIREFOX_JWT_ISSUER }}
           jwt-secret: ${{ secrets.FIREFOX_JWT_SECRET }}
