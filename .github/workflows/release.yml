@@ -33,7 +33,7 @@ jobs:
       EXTENSION_ID: npfnhbnfidlfkkoafboojlabnjaoldip
 
     steps:
-      - uses: actions/setup-node@v3.7.0
+      - uses: actions/setup-node@v4.0.0
         with:
           node-version: "16.10"
 
