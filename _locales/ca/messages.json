@@ -30,5 +30,9 @@
     "mean_mark": {
         "message": "Nota mitjana dels alumnes presentats:",
         "description": "The label used in the data table that shows the median of the marks obtained by the students."
+    },
+    "upvfix_link": {
+        "message": "Addicionalment, si no voleu tenir problemes amb alguns proveïdors que no suporten propietats d'ICAL desconegudes, pots fer servir <a href=\"https://github.com/ArnyminerZ/UPV_iCal-ColorFix\" target=\"_blank\">UPV_iCal-ColorFix</a>. L'enllaç és el següent:<br/><a href=\"{upvFixLink}\" target=\"_new_\">{upvFixLink}</a>",
+        "description": "The text shown in the places where the UPV_iCal-ColorFix integration is available."
     }
 }
