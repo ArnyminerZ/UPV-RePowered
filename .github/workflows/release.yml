@@ -12,13 +12,15 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Set env
+        run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
       - name: Create ZIP
-        run: zip -r extension-${{ github.event.pull_request.head.sha }}.zip .
+        run: zip -r extension-${{ env.RELEASE_VERSION }}.zip .
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
           name: extension-${{ github.sha }}
-          path: extension-${{ github.event.pull_request.head.sha }}.zip
+          path: extension-${{ env.RELEASE_VERSION }}.zip
   release-chrome:
     name: Release for Chrome
     runs-on: ubuntu-latest
@@ -36,17 +38,21 @@ jobs:
       - uses: actions/setup-node@v4.0.0
         with:
           node-version: "16.10"
+      - name: Set env
+        run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
 
       - name: Download bundle artifact
         uses: actions/download-artifact@v3
         with:
           name: extension-${{ github.sha }}
+      - name: Extract artifact
+        run: unzip extension-${{ github.sha }}
 
       - name: Install webstore cli
         run: npm install -g chrome-webstore-upload-cli
 
       - name: Upload step
-        run: chrome-webstore-upload upload --source chrome-extension-${{ github.sha }}.zip --extension-id ${{ env.EXTENSION_ID }} --client-id ${{ secrets.CI_GOOGLE_CLIENT_ID }} --client-secret ${{ secrets.CI_GOOGLE_CLIENT_SECRET }} --refresh-token ${{ secrets.CI_GOOGLE_REFRESH_TOKEN }}
+        run: chrome-webstore-upload upload --source extension-${{ env.RELEASE_VERSION }}.zip --extension-id ${{ env.EXTENSION_ID }} --client-id ${{ secrets.CI_GOOGLE_CLIENT_ID }} --client-secret ${{ secrets.CI_GOOGLE_CLIENT_SECRET }} --refresh-token ${{ secrets.CI_GOOGLE_REFRESH_TOKEN }}
   release-firefox:
     name: Release for Firefox
     runs-on: ubuntu-latest
@@ -55,6 +61,8 @@ jobs:
     env:
       ADDON_GUID: 279d1741-5957-4326-99d1-9b9b4e519e7a
     steps:
+      - name: Set env
+        run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
       - name: Download bundle artifact
         uses: actions/download-artifact@v3
         with:
@@ -62,7 +70,7 @@ jobs:
       - uses: wdzeng/firefox-addon@v1
         with:
           addon-guid: ${{ env.ADDON_GUID }}
-          xpi-path: extension-${{ github.sha }}.zip
+          xpi-path: extension-${{ env.RELEASE_VERSION }}.zip
           self-hosted: false
           jwt-issuer: ${{ secrets.FIREFOX_JWT_ISSUER }}
           jwt-secret: ${{ secrets.FIREFOX_JWT_SECRET }}
