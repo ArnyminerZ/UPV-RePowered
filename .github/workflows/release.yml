@@ -46,7 +46,7 @@ jobs:
         with:
           name: extension-${{ github.sha }}
       - name: Extract artifact
-        run: unzip extension-${{ github.sha }}
+        run: unzip ./extension-${{ github.sha }}
 
       - name: Install webstore cli
         run: npm install -g chrome-webstore-upload-cli
@@ -67,6 +67,8 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: extension-${{ github.sha }}
+      - name: Extract artifact
+        run: unzip ./extension-${{ github.sha }}
       - uses: wdzeng/firefox-addon@v1
         with:
           addon-guid: ${{ env.ADDON_GUID }}
