@@ -13,6 +13,10 @@
         {
             "js": ["mod-poliformat-ical.js"],
             "matches": ["https://poliformat.upv.es/portal/site/*/tool/*"]
+        },
+        {
+            "js": ["mod-intranet-ical.js"],
+            "matches": ["https://intranet.upv.es/pls/soalu/sic_ical_crypt.alumno*"]
         }
     ],
 

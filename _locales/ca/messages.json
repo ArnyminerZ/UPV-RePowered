@@ -34,5 +34,9 @@
     "upvfix_link": {
         "message": "Addicionalment, si no voleu tenir problemes amb alguns proveïdors que no suporten propietats d'ICAL desconegudes, pots fer servir <a href=\"https://github.com/ArnyminerZ/UPV_iCal-ColorFix\" target=\"_blank\">UPV_iCal-ColorFix</a>. L'enllaç és el següent:<br/><a href=\"{upvFixLink}\" target=\"_new_\">{upvFixLink}</a>",
         "description": "The text shown in the places where the UPV_iCal-ColorFix integration is available."
+    },
+    "upvfix_message": {
+        "message": "Direcció recomanada per als proveïdors que tinguen problemes amb propietats d'ICAL desconegudes. Fa servir el servei <a href=\"https://github.com/ArnyminerZ/UPV_iCal-ColorFix\" target=\"_blank\">UPV_iCal-ColorFix</a>.",
+        "description": "The text shown before the UPV_iCal-ColorFix link in intranet."
     }
 }
