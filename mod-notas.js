@@ -1,10 +1,4 @@
 /**
- * Alias for document.getElementById
- * @param {string} id The id of the element to select.
- * @returns {Node}
- */
-const _ = (id) => document.getElementById(id);
-/**
  * Alias for document.querySelector.
  * @param {string} selector The selector for searching for the element. # prefix for id, . for class names, and no prefix for tag name.
  * @returns {Node}
