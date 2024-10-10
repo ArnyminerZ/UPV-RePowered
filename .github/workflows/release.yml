@@ -34,7 +34,7 @@ jobs:
     name: Release for Chrome
     runs-on: ubuntu-latest
     needs: [update-version]
-    if: ${{ always() && !cancelled() && needs.update-version.result == 'success' }}
+    if: ${{ false && always() && !cancelled() && needs.update-version.result == 'success' }}
     # api usage reference:
     # * <https://developer.chrome.com/docs/webstore/using_webstore_api/>
     # * <https://github.com/fregante/chrome-webstore-upload/blob/main/How%20to%20generate%20Google%20API%20keys.md>
