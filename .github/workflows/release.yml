@@ -1,19 +1,67 @@
 name: Releaser
 
 on:
-  push:
-    tags:
-      - v*.*.**
+  release:
+    types:
+      - released
+
+concurrency:
+  group: "${{ github.workflow }}-${{ github.ref }}"
+  cancel-in-progress: true
 
 jobs:
-  build:
-    name: Compress and Release extension
+  prepare-build:
+    name: Update version name
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Set env
-        run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
+        run: echo "RELEASE_VERSION=${{ github.event.release.tag_name }}" >> $GITHUB_ENV
+      - name: Update version in manifest
+        run: |
+          sed -i "s/\"version\": \".*\"/\"version\": \"${{ env.RELEASE_VERSION }}\"/" manifest.json
+          sed -i "s/\"version\": \".*\"/\"version\": \"${{ env.RELEASE_VERSION }}\"/" manifest-v2.json
+      - name: Commit version.properties
+        id: commit_version
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: Updated version
+          file_pattern: 'manifest.json manifest-v2.json'
+
+  build-v2:
+    name: Compress and Release extension for v2
+    runs-on: ubuntu-latest
+    needs: [prepare-build]
+    if: ${{ always() && !cancelled() && needs.prepare-build.result == 'success' }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set env
+        run: echo "RELEASE_VERSION=${{ github.event.release.tag_name }}" >> $GITHUB_ENV
+      - name: Remove unnecessary files
+        run: rm -rf .github/ .gitignore .git/ .idea/ docs/ manifest.json README.md
+      - name: Set v2 for manifest
+        run: mv manifest-v2.json manifest.json
+      - name: Create ZIP
+        run: zip -r extension-${{ env.RELEASE_VERSION }}-v2.zip .
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: extension-${{ github.sha }}-v2
+          path: extension-${{ env.RELEASE_VERSION }}-v2.zip
+  build-v3:
+    name: Compress and Release extension for v3
+    runs-on: ubuntu-latest
+    needs: [prepare-build]
+    if: ${{ always() && !cancelled() && needs.prepare-build.result == 'success' }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set env
+        run: echo "RELEASE_VERSION=${{ github.event.release.tag_name }}" >> $GITHUB_ENV
+      - name: Remove unnecessary files
+        run: rm -rf .github/ .gitignore .git/ .idea/ docs/ manifest-v2.json README.md
       - name: Create ZIP
         run: zip -r extension-${{ env.RELEASE_VERSION }}.zip .
       - name: Upload artifact
@@ -21,11 +69,12 @@ jobs:
         with:
           name: extension-${{ github.sha }}
           path: extension-${{ env.RELEASE_VERSION }}.zip
+
   release-chrome:
     name: Release for Chrome
     runs-on: ubuntu-latest
-    needs: [build]
-    if: ${{ always() && !cancelled() && needs.build.result == 'success' }}
+    needs: [build-v3]
+    if: ${{ always() && !cancelled() && needs.build-v3.result == 'success' }}
     # api usage reference:
     # * <https://developer.chrome.com/docs/webstore/using_webstore_api/>
     # * <https://github.com/fregante/chrome-webstore-upload/blob/main/How%20to%20generate%20Google%20API%20keys.md>
@@ -39,7 +88,7 @@ jobs:
         with:
           node-version: "20.11"
       - name: Set env
-        run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
+        run: echo "RELEASE_VERSION=${{ github.event.release.tag_name }}" >> $GITHUB_ENV
 
       - name: Download bundle artifact
         uses: actions/download-artifact@v4
@@ -57,21 +106,21 @@ jobs:
   release-firefox:
     name: Release for Firefox
     runs-on: ubuntu-latest
-    needs: [build]
-    if: ${{ always() && !cancelled() && needs.build.result == 'success' }}
+    needs: [build-v2]
+    if: ${{ always() && !cancelled() && needs.build-v2.result == 'success' }}
     env:
       ADDON_GUID: 279d1741-5957-4326-99d1-9b9b4e519e7a
     steps:
       - name: Set env
-        run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
+        run: echo "RELEASE_VERSION=${{ github.event.release.tag_name }}" >> $GITHUB_ENV
       - name: Download bundle artifact
         uses: actions/download-artifact@v4
         with:
-          name: extension-${{ github.sha }}
+          name: extension-${{ github.sha }}-v2
       - uses: wdzeng/firefox-addon@v1
         with:
           addon-guid: ${{ env.ADDON_GUID }}
-          xpi-path: extension-${{ env.RELEASE_VERSION }}.zip
+          xpi-path: extension-${{ env.RELEASE_VERSION }}-v2.zip
           self-hosted: false
           jwt-issuer: ${{ secrets.FIREFOX_JWT_ISSUER }}
           jwt-secret: ${{ secrets.FIREFOX_JWT_SECRET }}
