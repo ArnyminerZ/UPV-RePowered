@@ -16,18 +16,15 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Set env
-        run: echo "RELEASE_VERSION=${{ github.event.release.tag_name }}" >> $GITHUB_ENV
       - name: Update version in manifest
         run: |
-          sed -i "s/\"version\": \".*\"/\"version\": \"${{ env.RELEASE_VERSION }}\"/" manifest.json
-          sed -i "s/\"version\": \".*\"/\"version\": \"${{ env.RELEASE_VERSION }}\"/" manifest-v2.json
+          sed -i "s/\"version\": \".*\"/\"version\": \"${{ github.event.release.tag_name }}\"/" manifest.json
       - name: Commit version.properties
         id: commit_version
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: Updated version
-          file_pattern: 'manifest.json manifest-v2.json'
+          file_pattern: 'manifest.json'
           branch: master
 
   release-chrome:
@@ -50,15 +47,15 @@ jobs:
         run: echo "RELEASE_VERSION=${{ github.event.release.tag_name }}" >> $GITHUB_ENV
 
       - name: Remove unnecessary files
-        run: rm -rf .github/ .gitignore .git/ .idea/ docs/ manifest-v2.json README.md
+        run: rm -rf .github/ .gitignore .git/ .idea/ docs/ README.md
       - name: Create ZIP
-        run: zip -r ${{ env.RELEASE_VERSION }}-chrome.zip .
+        run: zip -r ${{ github.event.release.tag_name }}-chrome.zip .
 
       - name: Upload Chrome Extension
         uses: wdzeng/chrome-extension@v1
         with:
           extension-id: ${{ env.EXTENSION_ID }}
-          zip-path: ${{ env.RELEASE_VERSION }}-chrome.zip
+          zip-path: ${{ github.event.release.tag_name }}-chrome.zip
           client-id: ${{ secrets.CI_GOOGLE_CLIENT_ID }}
           client-secret: ${{ secrets.CI_GOOGLE_CLIENT_SECRET }}
           refresh-token: ${{ secrets.CI_GOOGLE_REFRESH_TOKEN }}
@@ -84,17 +81,18 @@ jobs:
         run: npm install --global web-ext
 
       - name: Remove unnecessary files
-        run: rm -rf .github/ .gitignore .git/ .idea/ docs/ manifest.json README.md
+        run: rm -rf .github/ .gitignore .git/ .idea/ docs/ README.md
       - name: Switch to v2 for manifest
-        run: mv manifest-v2.json manifest.json
+        run: |
+          sed -i "s/\"manifest_version\": 3/\"manifest_version\": 2/" manifest.json
 
-      - name: Build release
-        run: web-ext build --filename=extension-${{ env.RELEASE_VERSION }}.zip
+      - name: Sign release
+        run: web-ext sign --api-key="${{ secrets.FIREFOX_JWT_ISSUER }}" --api-secret="${{ secrets.FIREFOX_JWT_SECRET }}" --channel listed
 
       - uses: wdzeng/firefox-addon@v1
         with:
           addon-guid: ${{ env.ADDON_GUID }}
-          xpi-path: web-ext-artifacts/extension-${{ env.RELEASE_VERSION }}.zip
+          xpi-path: web-ext-artifacts/upv_repowered-${{ github.event.release.tag_name }}.xpi
           self-hosted: false
           jwt-issuer: ${{ secrets.FIREFOX_JWT_ISSUER }}
           jwt-secret: ${{ secrets.FIREFOX_JWT_SECRET }}
@@ -124,14 +122,11 @@ jobs:
       - name: Sign release as unlisted
         run: web-ext sign --api-key="${{ secrets.FIREFOX_JWT_ISSUER }}" --api-secret="${{ secrets.FIREFOX_JWT_SECRET }}" --channel unlisted
 
-      - name: Create ZIP
-        run: zip -r ${{ env.RELEASE_VERSION }}-firefox.zip .
-
       - name: Upload binaries to release
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: ${{ env.RELEASE_VERSION }}-firefox.zip
-          asset_name: mything
+          file: web-ext-artifacts/upv_repowered-${{ github.event.release.tag_name }}.xpi
+          asset_name: firefox-${{ github.event.release.tag_name }}.xpi
           tag: ${{ github.ref }}
           overwrite: true
