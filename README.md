@@ -81,16 +81,8 @@ Supported languages:
 # Used libraries
 * [chrome-webstore-upload](https://github.com/fregante/chrome-webstore-upload)
 
-# Notes about versions
-## Firefox scheme
-Firefox doesn't allow signing multiple versions with the same version number. Since we release the app both in the
-asset store and in the GitHub releases, we have to use a different version number for each one.
-
-`.0` suffix is used for the asset store, and `.1` for the GitHub releases.
-
 # Changelog
-## 1.7.2
-- Changed versioning scheme.
+## 1.7.3
 - Added signing for Firefox.
 - Updated workflows.
 - Updated dependencies.
