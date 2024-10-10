@@ -28,6 +28,7 @@ jobs:
         with:
           commit_message: Updated version
           file_pattern: 'manifest.json manifest-v2.json'
+          branch: master
 
   build-v2:
     name: Compress and Release extension for v2
