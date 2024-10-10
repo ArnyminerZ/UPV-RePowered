@@ -1,7 +1,7 @@
 {
     "name": "UPV-RePowered",
     "description": "Extends the info provided by the UPV in the Intranet panel.",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "manifest_version": 2,
     "default_locale": "es",
     
