@@ -114,7 +114,7 @@ jobs:
           node-version: '20'
       - name: Update version in manifest
         run: |
-          sed -i "s/\"version\": \".*\"/\"version\": \"${{ github.event.release.tag_name }}\"/" manifest.json
+          sed -i "s/\"version\": \".*\"/\"version\": \"${{ github.event.release.tag_name }}-ose\"/" manifest.json
 
       - name: Install web-ext
         run: npm install --global web-ext
@@ -132,7 +132,7 @@ jobs:
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: web-ext-artifacts/upv_repowered-${{ github.event.release.tag_name }}.xpi
-          asset_name: firefox-${{ github.event.release.tag_name }}.xpi
+          file: web-ext-artifacts/upv_repowered-${{ github.event.release.tag_name }}-ose.xpi
+          asset_name: firefox-${{ github.event.release.tag_name }}-ose.xpi
           tag: ${{ github.ref }}
           overwrite: true
