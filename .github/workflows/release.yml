@@ -46,11 +46,14 @@ jobs:
         with:
           name: extension-${{ github.sha }}
 
-      - name: Install webstore cli
-        run: npm install -g chrome-webstore-upload-cli
-
-      - name: Upload step
-        run: chrome-webstore-upload upload --source extension-${{ env.RELEASE_VERSION }}.zip --extension-id ${{ env.EXTENSION_ID }} --client-id ${{ secrets.CI_GOOGLE_CLIENT_ID }} --client-secret ${{ secrets.CI_GOOGLE_CLIENT_SECRET }} --refresh-token ${{ secrets.CI_GOOGLE_REFRESH_TOKEN }}
+      - name: Upload Chrome Extension
+        uses: wdzeng/chrome-extension@v1
+        with:
+          extension-id: ${{ env.EXTENSION_ID }}
+          zip-path: extension-${{ env.RELEASE_VERSION }}.zip
+          client-id: ${{ secrets.CI_GOOGLE_CLIENT_ID }}
+          client-secret: ${{ secrets.CI_GOOGLE_CLIENT_SECRET }}
+          refresh-token: ${{ secrets.CI_GOOGLE_REFRESH_TOKEN }}
   release-firefox:
     name: Release for Firefox
     runs-on: ubuntu-latest
