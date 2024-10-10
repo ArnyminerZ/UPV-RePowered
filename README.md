@@ -89,6 +89,13 @@ asset store and in the GitHub releases, we have to use a different version numbe
 `.0` suffix is used for the asset store, and `.1` for the GitHub releases.
 
 # Changelog
+## 1.7.2
+- Changed versioning scheme.
+- Added signing for Firefox.
+- Updated workflows.
+- Updated dependencies.
+
+_Note: Skipped a lot of versions because of logistics._
 ## 1.0.3
 * Added direct links for iCalendar for [UPV_iCal-ColorFix](https://github.com/ArnyminerZ/UPV_iCal-ColorFix).
 ## 1.0.2
