@@ -48,6 +48,9 @@ jobs:
 
       - name: Remove unnecessary files
         run: rm -rf .github/ .gitignore .git/ .idea/ docs/ README.md
+      - name: Update version in manifest
+        run: |
+          sed -i "s/\"version\": \".*\"/\"version\": \"${{ github.event.release.tag_name }}\"/" manifest.json
       - name: Create ZIP
         run: zip -r ${{ github.event.release.tag_name }}-chrome.zip .
 
@@ -74,8 +77,9 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-      - name: Set env
-        run: echo "RELEASE_VERSION=${{ github.event.release.tag_name }}" >> $GITHUB_ENV
+      - name: Update version in manifest
+        run: |
+          sed -i "s/\"version\": \".*\"/\"version\": \"${{ github.event.release.tag_name }}\"/" manifest.json
 
       - name: Install web-ext
         run: npm install --global web-ext
@@ -108,8 +112,9 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-      - name: Set env
-        run: echo "RELEASE_VERSION=${{ github.event.release.tag_name }}" >> $GITHUB_ENV
+      - name: Update version in manifest
+        run: |
+          sed -i "s/\"version\": \".*\"/\"version\": \"${{ github.event.release.tag_name }}\"/" manifest.json
 
       - name: Install web-ext
         run: npm install --global web-ext
