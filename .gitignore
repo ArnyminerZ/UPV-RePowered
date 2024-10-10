@@ -1,2 +1,4 @@
 # Ignore the build dir, where the built zip files are stored
 .build
+web-ext-artifacts
+.amo-upload-uuid
