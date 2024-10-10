@@ -73,16 +73,23 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Install Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '20'
       - name: Set env
         run: echo "RELEASE_VERSION=${{ github.event.release.tag_name }}" >> $GITHUB_ENV
+
+      - name: Install web-ext
+        run: npm install --global web-ext
 
       - name: Remove unnecessary files
         run: rm -rf .github/ .gitignore .git/ .idea/ docs/ manifest.json README.md
       - name: Switch to v2 for manifest
         run: mv manifest-v2.json manifest.json
 
-      - name: Create ZIP
-        run: zip -r ${{ env.RELEASE_VERSION }}.zip .
+      - name: Build release
+        run: web-ext build --filename=extension-${{ env.RELEASE_VERSION }}.zip
 
       - uses: wdzeng/firefox-addon@v1
         with:
@@ -108,6 +115,9 @@ jobs:
       - name: Set env
         run: echo "RELEASE_VERSION=${{ github.event.release.tag_name }}" >> $GITHUB_ENV
 
+      - name: Install web-ext
+        run: npm install --global web-ext
+
       - name: Remove unnecessary files
         run: rm -rf .github/ .gitignore .git/ .idea/ docs/ manifest.json README.md
       - name: Switch to v2 for manifest
@@ -115,9 +125,6 @@ jobs:
 
       - name: Sign release as unlisted
         run: web-ext sign --api-key="${{ secrets.FIREFOX_JWT_ISSUER }}" --api-secret="${{ secrets.FIREFOX_JWT_SECRET }}" --channel unlisted
-
-      - name: Install signing dependency
-        run: npm install --global web-ext
 
       - name: Create ZIP
         run: zip -r ${{ env.RELEASE_VERSION }}-firefox.zip .
