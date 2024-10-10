@@ -120,7 +120,7 @@ jobs:
         run: npm install --global web-ext
 
       - name: Remove unnecessary files
-        run: rm -rf .github/ .gitignore .git/ .idea/ docs/ manifest.json README.md
+        run: rm -rf .github/ .gitignore .git/ .idea/ docs/ README.md
 
       - name: Sign release as unlisted
         run: web-ext sign --api-key="${{ secrets.FIREFOX_JWT_ISSUER }}" --api-secret="${{ secrets.FIREFOX_JWT_SECRET }}" --channel unlisted
