@@ -24,5 +24,5 @@ jobs:
       - name: Switch to v2 for manifest
         run: mv manifest-v2.json manifest.json
 
-      - name: Sign release as unlisted
+      - name: Run lint
         run: web-ext lint
