@@ -55,7 +55,7 @@ jobs:
         run: zip -r ${{ github.event.release.tag_name }}-chrome.zip .
 
       - name: Upload Chrome Extension
-        uses: wdzeng/chrome-extension@v1
+        uses: wdzeng/chrome-extension@v2
         with:
           extension-id: ${{ env.EXTENSION_ID }}
           zip-path: ${{ github.event.release.tag_name }}-chrome.zip
